@@ -28,7 +28,7 @@
           <div class='date-content'>
             <span
               class='time'
-              v-for='time in formatSessionTime(session.daytime)'
+              v-for='time in parseSessionTime(session.daytime)'
               @click='getPlaces(time, session.showdate)'
             >
             {{ time }}
@@ -126,7 +126,7 @@ export default {
       if (!data.hasOwnProperty(`${this.$route.query.movie_id}`)) return
       this.sessionsDate = data[`${this.$route.query.movie_id}`]
     },
-    formatSessionTime(str) {
+    parseSessionTime(str) {
       return str.split(';')
     },
     async getPlaces(date_time, date) {
@@ -134,14 +134,14 @@ export default {
       const query = this.appendQueryParams(date_time, date)
       const places = await this.$axios.$get(`/showPlaces?${query}`)
       this.$modal.show('modal-sessions')
-      this.sessionPlaces = this.formatPlacesData(places)
+      this.sessionPlaces = this.parsePlacesData(places)
       this.selectedPlace = {
         movie_id: +this.$route.query.movie_id,
         showdate: date,
         daytime: date_time
       }
     },
-    formatPlacesData(places) {
+    parsePlacesData(places) {
       const readableArray = []
       for (let key of places.data) {
         const obj = {}

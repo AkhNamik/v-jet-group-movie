@@ -16,6 +16,7 @@
     "vue-js-modal": "^2.0.1"
   },
   "devDependencies": {
+    "@nuxt/types": "^2.15.8",
     "eslint-config-prettier": "^8.3.0",
     "fibers": "^5.0.0",
     "prettier": "^2.3.2",

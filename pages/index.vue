@@ -54,7 +54,7 @@
             </p>
             <NuxtLink
               class='button button-light'
-              :to="{path: '/movies',query: { movie_id: movie.id }}"
+              :to="{path: '/movies', query: { movie_id: movie.id }}"
             >
               Get More Info
             </NuxtLink>
@@ -74,8 +74,8 @@
           </div>
           <div class='info'>
             <p class='title'>
-              {{ movie.name.slice(0, 25)
-              }}<span v-if='movie.name.length > 25'>...</span>
+              {{ movie.name.slice(0, 25) }}
+              <span v-if='movie.name.length > 25'>...</span>
             </p>
             <NuxtLink
               class='button button-light'
@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import debounce from 'lodash.debounce'
 export default {
   name: 'home',
   data: () => ({
@@ -114,14 +115,14 @@ export default {
       this.movies = data
     },
 
-    async searchMovies(e) {
+    searchMovies: debounce(async function(e) {
       const query = new URLSearchParams()
       this.selectedGenre ? query.append('genres', this.selectedGenre) : null
       query.append('name', e)
       const { data } = await this.$axios.$get(`/movies?${query}`)
       this.searchedMovies = data
       this.searchField = e
-    },
+    },300),
     async searchGenre(e) {
       const query = new URLSearchParams()
       this.searchField.length ? query.append('name', this.searchField) : null
