@@ -5,7 +5,7 @@
   <!-- Movie Info -->
   <div v-else class='single-movie container'>
     <NuxtLink class='button' :to="{ name: 'index' }">
-      Back???>>>>
+      Back
     </NuxtLink>
     <div class='movie-info'>
       <div class='movie-img'>
