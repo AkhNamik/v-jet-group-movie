@@ -12,7 +12,7 @@
         v-model='searchField'
       />
       <button v-show="searchField !== ''" @click='clearSearch' class='button'>
-        Clear Search>>>>???
+        Clear Search
       </button>
       <select v-model='selectedGenre' @input='searchGenre'>
         <option disabled value=''>Choose genre</option>
